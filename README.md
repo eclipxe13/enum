@@ -25,15 +25,15 @@ composer require eclipxe/enum
 ```
 
 
-## Basic usage
+## Usage
 
-Enums in other languages are `TEXT` for code, `INTEGER` for values. Even SPL Enum does it in this way.
-On the other hand, in this library we have the basic `StringEnum`, the value is the name of the method as
-it was declared on docblock. Also we have `IntEnum` that behaves more like common enums.
+`Enum` in other languages are `TEXT` for code, `INTEGER` for values. Even `SPL Enum` does it in this way.
+
+This library provides `StringEnum` where the *value* is the method's *name* as declared in docblock.
+Also provides `IntEnum` that behaves more like common enums, the *value* is the position in the docblock.
 
 The enums only show one valiable `value` to the outside scope.
 You can access its content using `$status->value()`.
-
 The value's type depends on the base class `StringEnum` and `IntEnum`.
 
 ### StringEnum example
@@ -56,16 +56,16 @@ final class DocumentStatus extends Eclipxe\Enum\StringEnum
 }
 ```
 
-#### Case insensivity for names and values
+### Case insensivity for names and values
 
-*names* and *values* (when) are strings are used as case-insensitive.
+*names* and *values*, when are strings, are used as case-insensitive.
 *names* because in PHP methods are base-insensitive (for *names*).
 *values* come from databases or user inputs and is better to have case-insensivity.
 
 So, when you declare a `StringEnum` member as `* @method static self Pending()` you are declaring an entry
 that will always have the value `Pending` but you can create it as case-insensitive.
 
-#### Creation of instances
+### Creation of instances
 
 You can create new instances from values using constructors:
 
@@ -132,7 +132,6 @@ be the maximum value plus one, resulting on `monday => 1, tuesday => 2, ... sund
 
 ```php
 <?php
-
 /**
  * @method static self monday()
  * @method static self tuesday()
@@ -158,7 +157,7 @@ final class WeekDays extends \Eclipxe\Enum\IntEnum
 
 ### Notes
 
-- I recommend you to declare your classes final.
+- I recommend you to declare your enum classes as `final`.
 - If extending, you cannot override values of previous classes.
 - You can compare equality on object instance.
 - Never compare identity on object instance, compare identity on value.
@@ -173,10 +172,9 @@ Differences         | spatie/enum                       | eclipxe/enum
 Creational pattern  | construct by value or name        | construct only by value, create by name on specific method 
 Comparisons         | case-insensitive for method calls | strict but case-insensitive
 Exposed information | many                              | only value
-Internals           | extending Enum                    | using trait
 Declarations        | declare in docblock and methods   | only docblocks allowed
 
-... and many others
+... and many others.
 
 ## PHP Support
 
