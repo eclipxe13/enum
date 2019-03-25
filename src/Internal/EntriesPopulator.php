@@ -52,7 +52,7 @@ class EntriesPopulator
 
         // populate with discovered
         $names = array_filter(
-            static::resolveNamesFromDocBlocks(),
+            $this->resolveNamesFromDocBlocks(),
             function (string $name) use ($entries) {
                 return ! $entries->hasName($name);
             }
