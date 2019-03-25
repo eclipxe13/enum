@@ -12,14 +12,16 @@
 > Enum based on the Brent Roose enum idea https://stitcher.io/blog/php-enums
 
 After reading the article [PHP Enums from Brent Roose](https://stitcher.io/blog/php-enums) and review
-the implementation made on [spatie/enum](https://github.com/spatie/enum) I think that it was overloaded
-of my expectations. Maybe spatie/enum version 1.0 was more close to what I needed.
+the implementation made on [spatie/enum](https://github.com/spatie/enum) I think that it overloaded
+my expectations. Maybe spatie/enum version 1.0 was more close to what I needed.
 
-So, I created this implementation of the same concept.
+So, I created this framework agnostic implementation library about the same concept.
+
 
 ## Installation
 
-Use [composer](https://getcomposer.org/), so please run
+Use [composer](https://getcomposer.org/), install using:
+
 ```shell
 composer require eclipxe/enum
 ```
@@ -27,112 +29,128 @@ composer require eclipxe/enum
 
 ## Usage
 
-`Enum` in other languages are `TEXT` for code, `INTEGER` for values. Even `SPL Enum` does it in this way.
+*Enum* in other languages are `TEXT` for code, `INTEGER` for values.
 
-This library provides `StringEnum` where the *value* is the method's *name* as declared in docblock.
-Also provides `IntEnum` that behaves more like common enums, the *value* is the position in the docblock.
+There are two meaningful information: *index* (`integer`) and *value* (`string`).
 
-The enums only show one valiable `value` to the outside scope.
-You can access its content using `$status->value()`.
-The value's type depends on the base class `StringEnum` and `IntEnum`.
+This library provides `Eclipxe\Enum` *abstract class* to be extended.
+The *value* is the method's *name* as declared in docblock.
+The *index* is the position ()starting at zero) in the docblock.
 
-### StringEnum example
+Values are registered one by one taking the overridden value or the method's name.
+
+Indices are registered one by one taking the overridden index or the maximum registered value plus 1.
+
+
+### Enum example
 
 ```php
 <?php
 /**
  * This is a common use case enum sample
+ * source: tests/Fixtures/Stages.php
  *
- * @method static self draft()
- * @method static self review()
- * @method static self archive()
+ * @method static self created()
+ * @method static self published()
+ * @method static self reviewed()
+ * @method static self purged()
  *
- * @method bool isDraft()
- * @method bool isReview()
- * @method bool isArchive()
+ * @method bool isCreated()
+ * @method bool isPublished()
+ * @method bool isReviewed()
+ * @method bool isPurged()
  */
-final class DocumentStatus extends Eclipxe\Enum\StringEnum
+class Stages extends Eclipxe\Enum\Enum
 {
 }
 ```
 
-### Case insensivity for names and values
-
-*names* and *values*, when are strings, are used as case-insensitive.
-*names* because in PHP methods are base-insensitive (for *names*).
-*values* come from databases or user inputs and is better to have case-insensivity.
-
-So, when you declare a `StringEnum` member as `* @method static self Pending()` you are declaring an entry
-that will always have the value `Pending` but you can create it as case-insensitive.
 
 ### Creation of instances
 
-You can create new instances from values using constructors:
+You can create new instances from values using construct with value, construct with index or static method name.
 
 ```php
 <?php
-use Eclipxe\Enum\Tests\Enums\DocumentStatus;
-use Eclipxe\Enum\Tests\Enums\WeekDays;
+use Eclipxe\Enum\Tests\Fixtures\Stages;
 
-$status = new DocumentStatus('DRAFT');
-echo $status; // 'draft' as defined in method name 
+// create from value
+$purged = new Stages('purged');
+ 
+// create from index
+$purged = new Stages(3);
 
-$day = new WeekDays(7);
-echo $day; // '7' as value overriden and cast to string by __toString()
+// create from an object that can be converted to string and contains the value
+$other = new Stages($purged);
+
+// create from static method
+$purged = Stages::purged();
+
+// create from static method is not case sensitive as methods are not
+$purged = Stages::{'PURGED'}();
+
+// throws a BadMethodCallException because foobar is not part of the enum
+$purged = Stages::{'FOOBAR'}();
 ```
 
-You can create new instances from names using defined static methods:
+
+### List all the options
+
+The only static method exposed on the Enum is `Enum::toArray(): array` that export the list of registered
+possible values as an array of indices and values.
 
 ```php
-<?php
-use Eclipxe\Enum\Tests\Enums\WeekDays;
-$day = WeekDays::monday();
-echo $day; // '1'  as value overriden and cast to string by __toString()
+use Eclipxe\Enum\Tests\Fixtures\Stages;
+
+var_export(Stages::toArray());
+/*
+[
+    0 => 'created',
+    1 => 'published',
+    2 => 'reviewed',
+    3 => 'purged',
+] 
+*/
 ```
 
-You can create new instances from names using specfic creational method:
-
-```php
-<?php
-use Eclipxe\Enum\Tests\Enums\BasicColors;
-$color = BasicColors::createFromName('RED');
-echo $color->value(); // '1'  as value overriden and cast to string by __toString()
-```
 
 ### Check if instance is of certain type
 
 Use the methods `is<name>()` to compare to specific value.
 
+You have to define this methods in your docblock to let your IDE or code analyzer detect what you are doing.
+
 ```php
 <?php
-use Eclipxe\Enum\Tests\Enums\DocumentStatus;
-$status = DocumentStatus::draft();
-$status->isDraft();  // true
-$status->isReview();  // false
+use Eclipxe\Enum\Tests\Fixtures\Stages;
+
+$stage = Stages::purged();
+
+$stage->isPurged(); // true
+$stage->isPublished(); // false
+$stage->{'isSomethingElse'}(); // false
+
+$stage->{'foobar'}(); // throw BadMethodCallException
 ```
 
-Or use weak comparison `$statusOne == $statusTwo`.
+Or use weak comparison `$stage == $stage`.
 
-### Overriding values
+### Overriding values or indices
 
-The only pattern for override values is overriding the method `overrideValueForName(string $name)`.
+You can override values or indices by overriding the methods `overrideValues()` or `overrideIndices()`.
 
-The parameter `$name` is the found name of the method in upper case.
+Rules:
 
-If `overrideValueForName`returns `null` will use the *default value*,
-if set will use exactly that value.
-
-You cannot override values in your extended clases, only the entries defined on you latest class.
-
-If you mess up with values, like giving the same value to two different entries, is your fault.
-I have no plans to introduce checks for this, but I'm open to contributions.
-
-In the following example, the value of `monday` is overriden, so the following found methods will
-be the maximum value plus one, resulting on `monday => 1, tuesday => 2, ... sunday => 7`
+- Return `array` key must be the name of the method as it was defined in the docblock section (case sensitive).
+- If override's value is `null` then it will not be overridden.
+- When override a value, if previous value exists then will throw a `ValueOverrideException`.
+- When override an index, if previous value exists then will throw a `IndexOverrideException`.
 
 ```php
 <?php
 /**
+ * This is an enum case where names and values are overridden
+ *
  * @method static self monday()
  * @method static self tuesday()
  * @method static self wednesday()
@@ -141,45 +159,103 @@ be the maximum value plus one, resulting on `monday => 1, tuesday => 2, ... sund
  * @method static self saturday()
  * @method static self sunday()
  */
-final class WeekDays extends \Eclipxe\Enum\IntEnum
+class WeekDays extends \Eclipxe\Enum\Enum
 {
-    protected static function overrideValueForName(string $name): ?int
+    protected static function overrideValues(): array
     {
-        $map = [
-            'MONDAY' => 1,
+        return [
+            'monday' => 'Monday',
+            'tuesday' => 'Tuesday',
+            'wednesday' => 'Wednesday',
+            'thursday' => 'Thursday',
+            'friday' => 'Friday',
+            'saturday' => 'Saturday',
+            'sunday' => 'Sunday',
         ];
-        return $map[$name] ?? null;
+    }
+
+    protected static function overrideIndices(): array
+    {
+        return [
+            'monday' => 1,
+        ];
     }
 }
+
 ```
+
+This will define these `array<index, value>`, retrieved using static method `WeekDays::toArray()`:
+
+```php
+[
+    1 => 'Monday',
+    2 => 'Tuesday',
+    3 => 'Wednesday',
+    4 => 'Thursday',
+    5 => 'Friday',
+    6 => 'Saturday',
+    7 => 'Sunday',
+];
+```
+
+And remember that create an Enum depends on registered values and indices,
+if invalid value or index is used then an exception is thrown:
+
+```php
+<?php
+use Eclipxe\Enum\Tests\Fixtures\WeekDays;
+
+new WeekDays(0); // throws IndexNotFoundException
+new WeekDays(1); // WeekDays {value: 'Monday', index: 1}
+
+new WeekDays('sunday'); // throws ValueNotFoundException (it is case sensitive)
+new WeekDays('Sunday'); // WeekDays {value: 'Sunday', index: 7}
+```
+
 
 ### Extending
 
-### Notes
+When creating an Enum extending from other, the parent Enum have priority on indices and values.
+You cannot override indices or values of previous classes.
 
-- I recommend you to declare your enum classes as `final`.
-- If extending, you cannot override values of previous classes.
-- You can compare equality on object instance.
-- Never compare identity on object instance, compare identity on value.
+I recommend you to declare your Enum classes as `final` to disable extension.
+
+See examples at `tests/Fixtures/ColorsBasic.php`, `tests/Fixtures/ColorsExtended.php`
+and `tests/Fixtures/ColorsExtendedWithBlackAndWhite.php`.
+
+
+### Exceptions
+
+Exceptions thrown from this package implements the empty interface `Eclipxe\Enum\Exceptions\EnumExceptionInterface`.
 
 
 ### Differences from spatie/enum
 
-Well, both are based on the same idea, but they are completely different.
+Well, both are based on the same idea, but they are different.
 
 Differences         | spatie/enum                       | eclipxe/enum
 ---                 | ---                               | ---
-Creational pattern  | construct by value or name        | construct only by value, create by name on specific method 
-Comparisons         | case-insensitive for method calls | strict but case-insensitive
-Exposed information | many                              | only value
-Declarations        | declare in docblock and methods   | only docblocks allowed
+Creational pattern  | construct by index, value or name | construct from index or value 
+*isX* Comparisons   | allow instanced and static calls  | allow only instanced calls
+Exposed information | many                              | only value/index
+Declarations        | declare in docblock and methods   | only docblock allowed
+JsonSerializable    | implemented                       | serialize/unserialize is up to you 
+Internals           | lot of static methods             | extracted logic to a different class
+Overloading         | as in java style                  | overriding methods for values and indices
 
 ... and many others.
+
 
 ## PHP Support
 
 This library is compatible with at least the oldest [PHP Supported Version](http://php.net/supported-versions.php)
-with active support. Please, try to use the full potential of the language.
+with **active** support. Please, try to use PHP full potential.
+
+We adhere to [Semantic Versioning](https://semver.org/).
+We will not introduce any compatibility backwards change on major versions.
+
+Internal classes (using `@internal` annotation) are not part of this agreement
+as they must only exists inside this project. Do not use them in your project.
 
 
 ## Contributing
@@ -203,7 +279,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [license]: https://github.com/eclipxe13/enum/blob/master/LICENSE
 [build]: https://travis-ci.org/eclipxe13/enum?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/enum/
-[sensiolabs]: https://insight.sensiolabs.com/projects/:INSIGHT_UUID
+[sensiolabs]: https://insight.sensiolabs.com/projects/f19c0c0f-410f-45aa-af24-04e651552f06
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/enum
 
@@ -212,6 +288,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/enum/master.svg?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/master.svg?style=flat-square
-[badge-sensiolabs]: https://insight.sensiolabs.com/projects/:INSIGHT_UUID/mini.png
+[badge-sensiolabs]: https://insight.sensiolabs.com/projects/f19c0c0f-410f-45aa-af24-04e651552f06/mini.png
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/master.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/enum.svg?style=flat-square

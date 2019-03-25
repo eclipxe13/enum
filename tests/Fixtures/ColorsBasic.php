@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Eclipxe\Enum\Tests\Enums;
+namespace Eclipxe\Enum\Tests\Fixtures;
 
-use Eclipxe\Enum\IntEnum;
+use Eclipxe\Enum\Enum;
 
 /**
- * This is a common use case enum sample
+ * This is a use case that will be extended
  *
  * @method static self red()
  * @method static self green()
@@ -18,6 +18,6 @@ use Eclipxe\Enum\IntEnum;
  * @method bool isBlue()
  *
  */
-class BasicColors extends IntEnum
+class ColorsBasic extends Enum
 {
 }

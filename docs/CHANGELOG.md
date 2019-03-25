@@ -11,6 +11,11 @@ In summary, [SemVer](https://semver.org/) can be viewed as ` Breaking . Feature 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
 
+## Version 0.2.0 2019-03-25
+
+- Rewrite with indices and values in mind
+
+
 ## Version 0.1.0 2019-03-20
 
 - Initial working release for testing with friends
