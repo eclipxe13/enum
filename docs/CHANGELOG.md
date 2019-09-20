@@ -13,7 +13,8 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 ## Version 0.2.1 2019-09-20
 
 - Fix possible bug calling no-static method as static.
-- Simplify travis builds, build coverage on Scrutinizer
+- Allow `@method` declarations with lead spaces, tabs and asterisks.
+- Simplify travis builds, build coverage on Scrutinizer.
 - Improve development environment and dist package.
 
 ## Version 0.2.0 2019-03-25
