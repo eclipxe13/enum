@@ -95,12 +95,16 @@ class EntriesPopulator
         // get comments
         $reflectionClass = new ReflectionClass($this->getClassName());
         $docComment = strval($reflectionClass->getDocComment());
+        return $this->resolveNamesFromDocComment($docComment);
+    }
 
+    public function resolveNamesFromDocComment(string $docComment): array
+    {
         // read declarations @method static self WORD()
+        //  [*\t ]*: any asterisk, space or tab
         //  [\w]+: any word letters, numbers and underscore
-        preg_match_all('/\@method static self ([\w]+)\(\)/', $docComment, $matches);
-        $values = $matches[1] ?? [];
-
-        return $values;
+        //  /m: ^ match beginning of the line
+        preg_match_all('/^[*\t ]*@method static self ([\w]+)\(\)/m', $docComment, $matches);
+        return $matches[1] ?? [];
     }
 }

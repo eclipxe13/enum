@@ -11,6 +11,7 @@ use Eclipxe\Enum\Exceptions\ValueNotFoundException;
 use Eclipxe\Enum\Internal\Entries;
 use Eclipxe\Enum\Internal\EntriesPopulator;
 use Eclipxe\Enum\Internal\Entry;
+use Throwable;
 
 abstract class Enum
 {
@@ -47,7 +48,7 @@ abstract class Enum
         if (is_object($valueOrIndex)) {
             try {
                 $valueOrIndex = strval($valueOrIndex);
-            } catch (\Throwable $exception) {
+            } catch (Throwable $exception) {
                 throw EnumConstructTypeError::create(static::class, $exception);
             }
         }
@@ -60,7 +61,7 @@ abstract class Enum
         } elseif (is_string($valueOrIndex)) { // is value
             $entry = static::currentEntries()->findEntryByValue($valueOrIndex);
             if (null === $entry) {
-                throw ValueNotFoundException::create(static::class, strval($valueOrIndex));
+                throw ValueNotFoundException::create(static::class, $valueOrIndex);
             }
         } else {
             throw EnumConstructTypeError::create(static::class);
