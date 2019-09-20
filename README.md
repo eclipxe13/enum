@@ -1,4 +1,4 @@
-# eclipxe13/enum
+# `eclipxe/enum`
 
 [![Source Code][badge-source]][source]
 [![Latest Version][badge-release]][release]
@@ -7,7 +7,6 @@
 [![Scrutinizer][badge-quality]][quality]
 [![Coverage Status][badge-coverage]][coverage]
 [![Total Downloads][badge-downloads]][downloads]
-[![SensioLabsInsight][badge-sensiolabs]][sensiolabs]
 
 > Enum based on the Brent Roose enum idea https://stitcher.io/blog/php-enums
 
@@ -35,7 +34,7 @@ There are two meaningful information: *index* (`integer`) and *value* (`string`)
 
 This library provides `Eclipxe\Enum` *abstract class* to be extended.
 The *value* is the method's *name* as declared in docblock.
-The *index* is the position ()starting at zero) in the docblock.
+The *index* is the position (starting at zero) in the docblock.
 
 Values are registered one by one taking the overridden value or the method's name.
 
@@ -128,12 +127,22 @@ $stage = Stages::purged();
 
 $stage->isPurged(); // true
 $stage->isPublished(); // false
-$stage->{'isSomethingElse'}(); // false
 
-$stage->{'foobar'}(); // throw BadMethodCallException
+$stage->{'isSomethingElse'}(); // false, even when SomethingElse is not defined
+$stage->{'SomethingElse'}(); // throw BadMethodCallException
 ```
 
-Or use weak comparison `$stage == $stage`.
+Or use weak comparison (equality, not identity):
+
+```php
+<?php
+use Eclipxe\Enum\Tests\Fixtures\Stages;
+
+$stage = Stages::purged();
+var_export($stage === Stages::purged()); // false, is not the same identity
+var_export($stage == Stages::purged()); // true
+var_export($stage == Stages::published()); // false
+```
 
 ### Overriding values or indices
 
@@ -266,7 +275,7 @@ and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## Copyright and License
 
-The eclipxe13/enum library is copyright © [Carlos C Soto](http://eclipxe.com.mx/)
+The `eclipxe/enum` library is copyright © [Carlos C Soto](http://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 
@@ -279,15 +288,13 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [license]: https://github.com/eclipxe13/enum/blob/master/LICENSE
 [build]: https://travis-ci.org/eclipxe13/enum?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/enum/
-[sensiolabs]: https://insight.sensiolabs.com/projects/f19c0c0f-410f-45aa-af24-04e651552f06
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/enum
 
-[badge-source]: http://img.shields.io/badge/source-eclipxe13/enum-blue.svg?style=flat-square
-[badge-release]: https://img.shields.io/github/release/eclipxe13/enum.svg?style=flat-square
-[badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[badge-build]: https://img.shields.io/travis/eclipxe13/enum/master.svg?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/master.svg?style=flat-square
-[badge-sensiolabs]: https://insight.sensiolabs.com/projects/f19c0c0f-410f-45aa-af24-04e651552f06/mini.png
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/master.svg?style=flat-square
-[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/enum.svg?style=flat-square
+[badge-source]: http://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
+[badge-release]: https://img.shields.io/github/release/eclipxe13/enum?style=flat-square
+[badge-license]: https://img.shields.io/github/license/eclipxe13/enum?style=flat-square
+[badge-build]: https://img.shields.io/travis/eclipxe13/enum/master?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/master?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/master?style=flat-square
+[badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/enum?style=flat-square
