@@ -60,7 +60,7 @@ abstract class Enum
         } elseif (is_string($valueOrIndex)) { // is value
             $entry = static::currentEntries()->findEntryByValue($valueOrIndex);
             if (null === $entry) {
-                throw ValueNotFoundException::create(static::class, strval($valueOrIndex));
+                throw ValueNotFoundException::create(static::class, $valueOrIndex);
             }
         } else {
             throw EnumConstructTypeError::create(static::class);
