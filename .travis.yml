@@ -2,13 +2,14 @@ language: php
 
 # php compatibility
 php:
-  - 7.2
-  - 7.3
+  - '7.2'
+  - '7.3'
+  - '7.4snapshot'
 
-env:
-  - FULLBUILD_PHP_VERSION: 7.3
+matrix:
+  allow_failures:
+    - php: '7.4snapshot'
 
-# This triggers builds to run on the new TravisCI infrastructure.
 # See: http://docs.travis-ci.com/user/workers/container-based-infrastructure/
 sudo: false
 
@@ -17,9 +18,8 @@ cache:
     - $HOME/.composer
 
 before_script:
-  # - travis_retry composer self-update
+  - phpenv config-rm xdebug.ini || true
   - travis_retry composer install --no-interaction --prefer-dist
-  - phpenv config-rm xdebug.ini
 
 script:
   - mkdir -p build
