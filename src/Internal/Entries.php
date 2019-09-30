@@ -14,7 +14,7 @@ use ArrayObject;
  */
 class Entries
 {
-    /** @var ArrayObject<Entry> */
+    /** @var ArrayObject|Entry[] */
     private $entries;
 
     public function __construct()

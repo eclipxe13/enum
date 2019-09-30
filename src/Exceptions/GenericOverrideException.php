@@ -11,7 +11,7 @@ class GenericOverrideException extends OutOfRangeException implements EnumExcept
 {
     protected const TYPE_NAME = '';
 
-    public static function create(string $className, string $value, Throwable $previous = null)
+    public static function create(string $className, string $value, Throwable $previous = null): self
     {
         // StatusEnum cannot override value to x
         return new static(sprintf('%s cannot override %s to %s', $className, static::TYPE_NAME, $value), 0, $previous);

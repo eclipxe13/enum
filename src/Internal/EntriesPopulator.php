@@ -93,6 +93,7 @@ class EntriesPopulator
     public function resolveNamesFromDocBlocks(): array
     {
         // get comments
+        /** @psalm-suppress ArgumentTypeCoercion */
         $reflectionClass = new ReflectionClass($this->getClassName());
         $docComment = strval($reflectionClass->getDocComment());
         return $this->resolveNamesFromDocComment($docComment);

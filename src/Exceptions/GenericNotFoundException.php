@@ -11,7 +11,7 @@ class GenericNotFoundException extends OutOfRangeException implements EnumExcept
 {
     protected const TYPE_NAME = '';
 
-    public static function create(string $className, string $value, Throwable $previous = null)
+    public static function create(string $className, string $value, Throwable $previous = null): self
     {
         // StatusEnum value x was not found
         return new static(sprintf('%s %s %s was not found', $className, static::TYPE_NAME, $value), 0, $previous);
