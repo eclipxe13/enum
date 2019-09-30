@@ -11,6 +11,10 @@
             "homepage": "http://eclipxe.com.mx/"
         }
     ],
+    "support": {
+        "source": "https://github.com/eclipxe13/enum",
+        "issues": "https://github.com/eclipxe13/enum/issues"
+    },
     "require": {
         "php": ">=7.2"
     },
