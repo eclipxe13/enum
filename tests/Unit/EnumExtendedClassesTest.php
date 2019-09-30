@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * This tests are based on Eclipxe\Enum\Tests\Enums\WeekDays
- * Tests should referr to overriding values or indices.
+ * Tests should refer to the behavior of extended class
  *
  * @see ColorsBasic
  * @see ColorsExtended
