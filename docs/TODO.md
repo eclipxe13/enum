@@ -1,3 +1,3 @@
 # eclipxe/enum To Do List
 
-*empty*
+- [ ] Allow one line systax definition as `/** @method static self foo() */` ?
