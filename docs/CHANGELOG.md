@@ -10,6 +10,13 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.2 2019-09-30
+
+- Allow syntax `@method static static name()`.
+- Allow syntax `/** @method static static name()...`.
+- Create one more tests to probe inherit classes type system.
+- Package: include support information.
+
 ## Version 0.2.1 2019-09-20
 
 - Fix possible bug calling no-static method as static.
