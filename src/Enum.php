@@ -70,7 +70,7 @@ abstract class Enum
         $this->content = $entry;
     }
 
-    public function __call($name, $arguments)
+    public function __call(string $name, array $arguments)
     {
         if (strlen($name) > 2 && 0 === strpos($name, 'is')) {
             $entry = static::currentEntries()->findEntryByName(substr($name, 2));
@@ -80,7 +80,7 @@ abstract class Enum
         throw BadMethodCallException::create(static::class, $name);
     }
 
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic(string $name, array $arguments)
     {
         $entry = static::currentEntries()->findEntryByName($name);
         if (null !== $entry) {
@@ -159,9 +159,11 @@ abstract class Enum
     final protected static function parentEntries(): Entries
     {
         $parentClass = strval(get_parent_class(static::class));
+        // if does not have a parent class or is the base template (Enum class)
         if ('' === $parentClass || self::class === $parentClass) {
             return new Entries();
         }
-        return $parentClass::{'currentEntries'}();
+        /** @var Enum $parentClass */
+        return $parentClass::currentEntries();
     }
 }

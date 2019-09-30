@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * This tests are based on Eclipxe\Enum\Tests\Enums\RepeatedValue
- * Tests should referr to catch errot.
+ * Tests should refer to catch error conditions.
  *
  * @see RepeatedValue
  * @see RepeatedIndex

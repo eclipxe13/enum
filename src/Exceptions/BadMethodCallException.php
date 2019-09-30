@@ -9,7 +9,7 @@ use Throwable;
 
 class BadMethodCallException extends PhpBadMethodCallException implements EnumExceptionInterface
 {
-    public static function create(string $className, string $methodName, Throwable $previous = null)
+    public static function create(string $className, string $methodName, Throwable $previous = null): self
     {
         return new static(
             sprintf('Call to undefined method %s::%s', $className, $methodName),

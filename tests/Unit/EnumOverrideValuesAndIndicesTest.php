@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * This tests are based on Eclipxe\Enum\Tests\Enums\WeekDays
- * Tests should referr to overriding values or indices.
+ * Tests should refer to overriding values or indices.
  *
  * @see WeekDays
  */

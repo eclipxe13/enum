@@ -1,4 +1,3 @@
 # eclipxe/enum To Do List
 
-- Add a test to check that the only contained variable is `value` (how?)
-- Extract common parts from StringEnum and IntEnum to EnumTrait or AbstractEnum
+- [ ] Allow one line systax definition as `/** @method static self foo() */` ?
