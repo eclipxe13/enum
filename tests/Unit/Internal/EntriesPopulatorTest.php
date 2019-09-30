@@ -26,6 +26,7 @@ class EntriesPopulatorTest extends TestCase
             'no @method' => ["/**\n * static self foo()\n */", []],
             'no static' => ["/**\n * method self foo()\n */", []],
             'no self' => ["/**\n * method static foo()\n */", []],
+            'change self' => ["/**\n * method FooBar foo()\n */", []],
             'no name' => ["/**\n * method static ()\n */", []],
             'invalid name' => ["/**\n * method static foo-bar()\n */", []],
             'no ()' => ["/**\n * method static foo\n */", []],
@@ -47,8 +48,21 @@ class EntriesPopulatorTest extends TestCase
      * @param array $expected
      * @dataProvider providerResolveNamesFromDocComment
      */
-    public function testResolveNamesFromDocComment(string $specimen, array $expected): void
+    public function testResolveNamesFromDocCommentSelf(string $specimen, array $expected): void
     {
+        $helper = new EntriesPopulator('foo', [], [], new Entries());
+        $resolved = $helper->resolveNamesFromDocComment($specimen);
+        $this->assertSame($expected, $resolved);
+    }
+
+    /**
+     * @param string $specimen
+     * @param array $expected
+     * @dataProvider providerResolveNamesFromDocComment
+     */
+    public function testResolveNamesFromDocCommentStatic(string $specimen, array $expected): void
+    {
+        $specimen = str_replace('self', 'static', $specimen);
         $helper = new EntriesPopulator('foo', [], [], new Entries());
         $resolved = $helper->resolveNamesFromDocComment($specimen);
         $this->assertSame($expected, $resolved);

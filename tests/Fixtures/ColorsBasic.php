@@ -9,9 +9,9 @@ use Eclipxe\Enum\Enum;
 /**
  * This is a use case that will be extended
  *
- * @method static self red()
- * @method static self green()
- * @method static self blue()
+ * @method static static red()
+ * @method static static green()
+ * @method static static blue()
  *
  * @method bool isRed()
  * @method bool isGreen()
