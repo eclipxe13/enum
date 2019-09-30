@@ -59,7 +59,7 @@ Indices are registered one by one taking the overridden index or the maximum reg
  * @method bool isReviewed()
  * @method bool isPurged()
  */
-class Stages extends Eclipxe\Enum\Enum
+final class Stages extends Eclipxe\Enum\Enum
 {
 }
 ```
@@ -99,6 +99,7 @@ The only static method exposed on the Enum is `Enum::toArray(): array` that expo
 possible values as an array of indices and values.
 
 ```php
+<?php
 use Eclipxe\Enum\Tests\Fixtures\Stages;
 
 var_export(Stages::toArray());
@@ -168,7 +169,7 @@ Rules:
  * @method static self saturday()
  * @method static self sunday()
  */
-class WeekDays extends \Eclipxe\Enum\Enum
+final class WeekDays extends \Eclipxe\Enum\Enum
 {
     protected static function overrideValues(): array
     {
@@ -228,6 +229,9 @@ When creating an Enum extending from other, the parent Enum have priority on ind
 You cannot override indices or values of previous classes.
 
 I recommend you to declare your Enum classes as `final` to disable extension.
+
+If using class extension, do not use `@method static self name()` syntax,
+use `@method static static name()` syntax instead to help analysis tools.
 
 See examples at `tests/Fixtures/ColorsBasic.php`, `tests/Fixtures/ColorsExtended.php`
 and `tests/Fixtures/ColorsExtendedWithBlackAndWhite.php`.
