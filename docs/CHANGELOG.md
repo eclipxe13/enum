@@ -10,6 +10,11 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.3 2019-12-06
+
+- Improve development environment
+- Add PHP 7.4 to Travis CI
+
 ## Version 0.2.2 2019-09-30
 
 - Allow syntax `@method static static name()`.
