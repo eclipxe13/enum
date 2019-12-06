@@ -15,6 +15,13 @@
         "source": "https://github.com/eclipxe13/enum",
         "issues": "https://github.com/eclipxe13/enum/issues"
     },
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
     "require": {
         "php": ">=7.2"
     },
@@ -22,7 +29,8 @@
         "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^3.0",
         "friendsofphp/php-cs-fixer": "^2.4",
-        "phpstan/phpstan-shim": "^0.11"
+        "phpstan/phpstan-shim": "^0.11",
+        "psalm/phar": "^3.7"
     },
     "autoload": {
         "psr-4": {
@@ -35,7 +43,6 @@
         }
     },
     "scripts": {
-        "dev:clean": ["rm -rf build/", "mkdir -p build/"],
         "dev:build": ["@dev:fix-style", "@dev:test"],
         "dev:check-style": [
             "vendor/bin/php-cs-fixer fix --dry-run --verbose",
@@ -55,7 +62,6 @@
         ]
     },
     "scripts-descriptions": {
-        "dev:clean": "DEV: recreate build directory, remove any .phpunit.result.cache files",
         "dev:build": "DEV: run dev:fix-style dev:tests and dev:docs, run before pull request",
         "dev:check-style": "DEV: search for code style errors using php-cs-fixer and phpcs",
         "dev:fix-style": "DEV: fix code style errors using php-cs-fixer and phpcbf",

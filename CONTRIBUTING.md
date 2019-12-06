@@ -64,8 +64,7 @@ When you do begin working on your feature, here are some guidelines to consider:
 If you are having issues with coding standars use `php-cs-fixer` and `phpcbf`
 
 ```shell
-vendor/bin/php-cs-fixer fix -v
-vendor/bin/phpcbf src/ tests/
+composer dev:fix-style
 ```
 
 ## Running Tests
@@ -75,8 +74,5 @@ If any of these do not pass, it will result in a complete build failure.
 Before you can run these, be sure to `composer install` or `composer update`.
 
 ```shell
-vendor/bin/phpcs -sp src/ tests/
-vendor/bin/php-cs-fixer fix -v --dry-run
-vendor/bin/phpunit --coverage-text
-vendor/bin/phpstan analyze --level max src/ tests/
+composer dev:build
 ```

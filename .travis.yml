@@ -1,10 +1,7 @@
 language: php
 
 # php compatibility
-php:
-  - '7.2'
-  - '7.3'
-  - '7.4'
+php: ['7.2', '7.3', '7.4']
 
 cache:
   - directories:
@@ -15,10 +12,11 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-dist
 
 script:
-  - mkdir -p build
-  - vendor/bin/php-cs-fixer fix --verbose
-  - vendor/bin/phpcbf --colors -sp src/ tests/
+  - vendor/bin/php-cs-fixer fix --verbose --dry-run
+  - vendor/bin/phpcs --colors -sp src/ tests/
   - vendor/bin/phpunit --testdox --verbose
+  - vendor/bin/phpstan analyse --verbose --no-progress --level max src/ tests/
+  - vendor/bin/psalm.phar --no-progress
 
 notifications:
   email: false
