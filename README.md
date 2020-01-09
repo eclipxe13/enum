@@ -143,6 +143,8 @@ $stage = Stages::purged();
 var_export($stage === Stages::purged()); // false, is not the same identity
 var_export($stage == Stages::purged()); // true
 var_export($stage == Stages::published()); // false
+var_export($stage->value() === Stages::purged()->value()); // true (compare using value)
+var_export($stage->index() === Stages::purged()->index()); // true (compare using index)
 ```
 
 ### Overriding values or indices
