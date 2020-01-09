@@ -10,6 +10,19 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.4 2020-01-09
+
+- It is not intented to create a breaking change, but strictly speaking there is one:
+  The classes `GenericOverrideException` and `GenericNotFoundException` have changed making the class and `create` method
+  `abstract`, also removed `TYPE_NAME` constant. It would only affect you in case that you are extending this clases.  
+- Development:
+    - Add `psalm` to `composer dev:build`.
+    - Change `phpstan/phpstan-shim` to `phpstan/phpstan`.
+    - Upgrade `phpstan` to `^0.12`.
+    - Scrutinizer-CI: remove all development dependences but `phpunit`. 
+- Update license year.
+- Add more examples to compare two enums, use https on links.
+
 ## Version 0.2.3 2019-12-06
 
 - Improve development environment
