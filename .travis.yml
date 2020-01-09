@@ -19,4 +19,5 @@ script:
   - vendor/bin/psalm.phar --no-progress
 
 notifications:
-  email: false
+  email:
+    if: branch = master

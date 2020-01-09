@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class EntriesPopulatorTest extends TestCase
 {
+    /** @return array<string, array> */
     public function providerResolveNamesFromDocComment(): array
     {
         return [
@@ -45,7 +46,7 @@ class EntriesPopulatorTest extends TestCase
 
     /**
      * @param string $specimen
-     * @param array $expected
+     * @param array<string, array> $expected
      * @dataProvider providerResolveNamesFromDocComment
      */
     public function testResolveNamesFromDocCommentSelf(string $specimen, array $expected): void
@@ -57,7 +58,7 @@ class EntriesPopulatorTest extends TestCase
 
     /**
      * @param string $specimen
-     * @param array $expected
+     * @param array<string, array> $expected
      * @dataProvider providerResolveNamesFromDocComment
      */
     public function testResolveNamesFromDocCommentStatic(string $specimen, array $expected): void

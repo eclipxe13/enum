@@ -143,6 +143,8 @@ $stage = Stages::purged();
 var_export($stage === Stages::purged()); // false, is not the same identity
 var_export($stage == Stages::purged()); // true
 var_export($stage == Stages::published()); // false
+var_export($stage->value() === Stages::purged()->value()); // true (compare using value)
+var_export($stage->index() === Stages::purged()->index()); // true (compare using index)
 ```
 
 ### Overriding values or indices
@@ -261,7 +263,7 @@ Overloading         | as in java style                  | overriding methods for
 
 ## PHP Support
 
-This library is compatible with at least the oldest [PHP Supported Version](http://php.net/supported-versions.php)
+This library is compatible with at least the oldest [PHP Supported Version](https://php.net/supported-versions.php)
 with **active** support. Please, try to use PHP full potential.
 
 We adhere to [Semantic Versioning](https://semver.org/).
@@ -279,7 +281,7 @@ and don't forget to take a look in the [TODO][] and [CHANGELOG][] files.
 
 ## Copyright and License
 
-The `eclipxe/enum` library is copyright © [Carlos C Soto](http://eclipxe.com.mx/)
+The `eclipxe/enum` library is copyright © [Carlos C Soto](https://eclipxe.com.mx/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 
@@ -295,7 +297,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/enum
 
-[badge-source]: http://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
+[badge-source]: https://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/enum?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/enum?style=flat-square
 [badge-build]: https://img.shields.io/travis/eclipxe13/enum/master?style=flat-square
