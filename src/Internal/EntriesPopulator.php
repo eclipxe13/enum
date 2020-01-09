@@ -19,15 +19,23 @@ class EntriesPopulator
     /** @var string */
     private $className;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     private $overrideValues;
 
-    /** @var array */
+    /** @var array<string, mixed> */
     private $overrideIndices;
 
     /** @var Entries */
     private $parentEntries;
 
+    /**
+     * EntriesPopulator constructor.
+     *
+     * @param string $className
+     * @param array<string, mixed> $overrideValues
+     * @param array<string, mixed> $overrideIndices
+     * @param Entries $parentEntries
+     */
     public function __construct(
         string $className,
         array $overrideValues,
@@ -90,15 +98,24 @@ class EntriesPopulator
         return $index;
     }
 
+    /**
+     * @return array<string>
+     * @throws \ReflectionException
+     */
     public function resolveNamesFromDocBlocks(): array
     {
         // get comments
-        /** @psalm-suppress ArgumentTypeCoercion */
-        $reflectionClass = new ReflectionClass($this->getClassName());
+        /** @var class-string $className */
+        $className = $this->getClassName();
+        $reflectionClass = new ReflectionClass($className);
         $docComment = strval($reflectionClass->getDocComment());
         return $this->resolveNamesFromDocComment($docComment);
     }
 
+    /**
+     * @param string $docComment
+     * @return array<string>
+     */
     public function resolveNamesFromDocComment(string $docComment): array
     {
         // read declarations @method static self WORD()

@@ -70,6 +70,11 @@ abstract class Enum
         $this->content = $entry;
     }
 
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     * @return mixed
+     */
     public function __call(string $name, array $arguments)
     {
         if (strlen($name) > 2 && 0 === strpos($name, 'is')) {
@@ -80,6 +85,11 @@ abstract class Enum
         throw BadMethodCallException::create(static::class, $name);
     }
 
+    /**
+     * @param string $name
+     * @param mixed[] $arguments
+     * @return static
+     */
     public static function __callStatic(string $name, array $arguments)
     {
         $entry = static::currentEntries()->findEntryByName($name);
@@ -90,6 +100,11 @@ abstract class Enum
         throw BadMethodCallException::create(static::class, $name);
     }
 
+    /**
+     * Obtain the list of registered possible values as an array of indices and values
+     *
+     * @return array<int, string>
+     */
     final public static function toArray(): array
     {
         return static::currentEntries()->toIndexValueArray();
@@ -105,7 +120,7 @@ abstract class Enum
      * method self extraSmall()
      * return ['extraSmall' => 'xs', ...];
      *
-     * @return array
+     * @return array<string, string>
      */
     protected static function overrideValues(): array
     {
@@ -122,7 +137,7 @@ abstract class Enum
      * method self second()
      * return ['second' => 2, ...];
      *
-     * @return array
+     * @return array<string, int>
      */
     protected static function overrideIndices(): array
     {

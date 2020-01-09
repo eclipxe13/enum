@@ -7,13 +7,18 @@ namespace Eclipxe\Enum\Exceptions;
 use OutOfRangeException;
 use Throwable;
 
-class GenericOverrideException extends OutOfRangeException implements EnumExceptionInterface
+abstract class GenericOverrideException extends OutOfRangeException implements EnumExceptionInterface
 {
-    protected const TYPE_NAME = '';
+    /**
+     * @param string $className
+     * @param string $value
+     * @param Throwable|null $previous
+     * @return static
+     */
+    abstract public static function create(string $className, string $value, Throwable $previous = null);
 
-    public static function create(string $className, string $value, Throwable $previous = null): self
+    protected static function formatGenericMessage(string $className, string $typeName, string $value): string
     {
-        // StatusEnum cannot override value to x
-        return new static(sprintf('%s cannot override %s to %s', $className, static::TYPE_NAME, $value), 0, $previous);
+        return sprintf('%s cannot override %s to %s', $className, $typeName, $value);
     }
 }

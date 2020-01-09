@@ -14,7 +14,7 @@ use ArrayObject;
  */
 class Entries
 {
-    /** @var ArrayObject|Entry[] */
+    /** @var ArrayObject<string, Entry>|array<string, Entry> */
     private $entries;
 
     public function __construct()
@@ -22,6 +22,11 @@ class Entries
         $this->entries = new ArrayObject();
     }
 
+    /**
+     * Obtain the list of registered possible values as an array of indices and values
+     *
+     * @return array<int, string>
+     */
     public function toIndexValueArray(): array
     {
         $mixed = [];
@@ -78,6 +83,9 @@ class Entries
         return null;
     }
 
+    /**
+     * @return array<int, int>
+     */
     public function indices(): array
     {
         $indices = [];
