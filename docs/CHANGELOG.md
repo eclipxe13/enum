@@ -16,6 +16,10 @@ Development changes:
 
 - Upgrade to `friendsofphp/php-cs-fixer:^3.0`.
 
+CI:
+
+- Add PHP 8.0 to Travis matrix build.
+
 ## Version 0.2.4 2020-01-09
 
 - It is not intented to create a breaking change, but strictly speaking there is one:
