@@ -36,9 +36,9 @@ This library provides `Eclipxe\Enum` *abstract class* to be extended.
 The *value* is the method's *name* as declared in docblock.
 The *index* is the position (starting at zero) in the docblock.
 
-Values are registered one by one taking the overridden value or the method's name.
+Values are registered one by one taking the overridden value, or the method's name.
 
-Indices are registered one by one taking the overridden index or the maximum registered value plus 1.
+Indices are registered one by one taking the overridden index, or the maximum registered value plus 1.
 
 
 ### Enum example
@@ -118,7 +118,7 @@ var_export(Stages::toArray());
 
 Use the methods `is<name>()` to compare to specific value.
 
-You have to define this methods in your docblock to let your IDE or code analyzer detect what you are doing.
+You have to define these methods in your docblock to let your IDE or code analyzer detect what you are doing.
 
 ```php
 <?php
@@ -153,7 +153,7 @@ You can override values or indices by overriding the methods `overrideValues()` 
 
 Rules:
 
-- Return `array` key must be the name of the method as it was defined in the docblock section (case sensitive).
+- Return `array` key must be the name of the method as it was defined in the docblock section (case-sensitive).
 - If override's value is `null` then it will not be overridden.
 - When override a value, if previous value exists then will throw a `ValueOverrideException`.
 - When override an index, if previous value exists then will throw a `IndexOverrideException`.
@@ -210,8 +210,8 @@ This will define these `array<index, value>`, retrieved using static method `Wee
 ];
 ```
 
-And remember that create an Enum depends on registered values and indices,
-if invalid value or index is used then an exception is thrown:
+Remember that Enum creation depends on registered values and indices,
+if and invalid value or index is used then an exception is thrown:
 
 ```php
 <?php
@@ -270,7 +270,7 @@ We adhere to [Semantic Versioning](https://semver.org/).
 We will not introduce any compatibility backwards change on major versions.
 
 Internal classes (using `@internal` annotation) are not part of this agreement
-as they must only exists inside this project. Do not use them in your project.
+as they must only exist inside this project. Do not use them in your project.
 
 
 ## Contributing
