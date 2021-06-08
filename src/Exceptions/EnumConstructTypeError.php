@@ -11,10 +11,7 @@ class EnumConstructTypeError extends TypeError implements EnumExceptionInterface
 {
     public static function create(string $className, Throwable $previous = null): self
     {
-        return new self(
-            sprintf('Argument passed to %s must be integer for index or string for value', $className),
-            0,
-            $previous
-        );
+        $message = sprintf('Argument passed to %s must be integer for index or string for value', $className);
+        return new self($message, 0, $previous);
     }
 }

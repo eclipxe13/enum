@@ -14,12 +14,12 @@ use ArrayObject;
  */
 class Entries
 {
-    /** @var ArrayObject<string, Entry>|array<string, Entry> */
+    /** @var ArrayObject<string, Entry> */
     private $entries;
 
     public function __construct()
     {
-        $this->entries = new ArrayObject();
+        $this->entries = new ArrayObject([]);
     }
 
     /**
@@ -48,11 +48,6 @@ class Entries
 
     public function append(self $entries): void
     {
-        // access to private property since it has no sense to expose it to the outside
-        /**
-         * @var string $name
-         * @var Entry $entry
-         */
         foreach ($entries->entries as $name => $entry) {
             $this->entries[$name] = $entry;
         }

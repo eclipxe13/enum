@@ -11,10 +11,7 @@ class BadMethodCallException extends PhpBadMethodCallException implements EnumEx
 {
     public static function create(string $className, string $methodName, Throwable $previous = null): self
     {
-        return new self(
-            sprintf('Call to undefined method %s::%s', $className, $methodName),
-            0,
-            $previous
-        );
+        $message = sprintf('Call to undefined method %s::%s', $className, $methodName);
+        return new self($message, 0, $previous);
     }
 }
