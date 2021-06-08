@@ -16,6 +16,8 @@ my expectations. Maybe spatie/enum version 1.0 was more close to what I needed.
 
 So, I created this framework agnostic implementation library about the same concept.
 
+As of PHP 8.1 enums will be part of the language, it means that this library will not be required anymore. 
+Check the RFC <https://wiki.php.net/rfc/enumerations> and adapt your code to use PHP Enums.
 
 ## Installation
 
