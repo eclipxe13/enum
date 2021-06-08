@@ -19,6 +19,7 @@ Development changes:
 CI:
 
 - Add PHP 8.0 to Travis matrix build.
+- Do not upgrade composer on scrutinizer since it is on a read-only file system.
 
 ## Version 0.2.4 2020-01-09
 
