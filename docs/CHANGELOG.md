@@ -12,6 +12,10 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 ## Version 0.2.5 2020-06-08
 
+Code changes:
+
+- Remove creational abstract static methods for exceptions.
+
 Development changes:
 
 - Upgrade to `friendsofphp/php-cs-fixer:^3.0`.
