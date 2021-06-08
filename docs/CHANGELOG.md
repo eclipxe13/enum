@@ -10,6 +10,12 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.5 2020-06-08
+
+Development changes:
+
+- Upgrade to `friendsofphp/php-cs-fixer:^3.0`.
+
 ## Version 0.2.4 2020-01-09
 
 - It is not intented to create a breaking change, but strictly speaking there is one:
