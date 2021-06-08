@@ -292,7 +292,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [source]: https://github.com/eclipxe13/enum
 [release]: https://github.com/eclipxe13/enum/releases
 [license]: https://github.com/eclipxe13/enum/blob/master/LICENSE
-[build]: https://travis-ci.org/eclipxe13/enum?branch=master
+[build]: https://travis-ci.com/eclipxe13/enum?branch=master
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/enum/
 [coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/master/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/enum
@@ -300,7 +300,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-source]: https://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/enum?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/enum?style=flat-square
-[badge-build]: https://img.shields.io/travis/eclipxe13/enum/master?style=flat-square
+[badge-build]: https://img.shields.io/travis/com/eclipxe13/enum/master?style=flat-square
 [badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/master?style=flat-square
 [badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/master?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/enum?style=flat-square
