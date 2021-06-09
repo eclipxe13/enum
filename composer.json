@@ -8,7 +8,7 @@
         {
             "name": "Carlos C Soto",
             "email": "eclipxe13@gmail.com",
-            "homepage": "http://eclipxe.com.mx/"
+            "homepage": "https://eclipxe.com.mx/"
         }
     ],
     "support": {
@@ -28,9 +28,9 @@
     "require-dev": {
         "phpunit/phpunit": "^8.0",
         "squizlabs/php_codesniffer": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.4",
+        "friendsofphp/php-cs-fixer": "^3.0",
         "phpstan/phpstan": "^0.12",
-        "psalm/phar": "^3.7"
+        "psalm/phar": "^4.7"
     },
     "autoload": {
         "psr-4": {

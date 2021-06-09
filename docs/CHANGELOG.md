@@ -10,6 +10,21 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.5 2020-06-08
+
+Code changes:
+
+- Remove creational abstract static methods for exceptions.
+
+Development changes:
+
+- Upgrade to `friendsofphp/php-cs-fixer:^3.0`.
+
+CI:
+
+- Add PHP 8.0 to Travis matrix build.
+- Do not upgrade composer on scrutinizer since it is on a read-only file system.
+
 ## Version 0.2.4 2020-01-09
 
 - It is not intented to create a breaking change, but strictly speaking there is one:
