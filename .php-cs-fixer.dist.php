@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
-    ->setCacheFile(__DIR__.'/build/.php_cs.cache')
+    ->setCacheFile(__DIR__ . '/build/php_cs.cache')
     ->setRules([
         '@PSR2' => true,
         '@PHP70Migration' => true,
@@ -45,6 +45,6 @@ return (new PhpCsFixer\Config())
     ->setFinder(
         PhpCsFixer\Finder::create()
             ->in(__DIR__)
-            ->exclude(['vendor', 'build'])
+            ->exclude(['vendor', 'tools', 'build'])
     )
 ;

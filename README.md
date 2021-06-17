@@ -27,7 +27,6 @@ Use [composer](https://getcomposer.org/), install using:
 composer require eclipxe/enum
 ```
 
-
 ## Usage
 
 *Enum* in other languages are `TEXT` for code, `INTEGER` for values.
@@ -41,7 +40,6 @@ The *index* is the position (starting at zero) in the docblock.
 Values are registered one by one taking the overridden value, or the method's name.
 
 Indices are registered one by one taking the overridden index, or the maximum registered value plus 1.
-
 
 ### Enum example
 
@@ -65,7 +63,6 @@ final class Stages extends Eclipxe\Enum\Enum
 {
 }
 ```
-
 
 ### Creation of instances
 
@@ -94,7 +91,6 @@ $purged = Stages::{'PURGED'}();
 $purged = Stages::{'FOOBAR'}();
 ```
 
-
 ### List all the options
 
 The only static method exposed on the Enum is `Enum::toArray(): array` that export the list of registered
@@ -114,7 +110,6 @@ var_export(Stages::toArray());
 ] 
 */
 ```
-
 
 ### Check if instance is of certain type
 
@@ -226,7 +221,6 @@ new WeekDays('sunday'); // throws ValueNotFoundException (it is case sensitive)
 new WeekDays('Sunday'); // WeekDays {value: 'Sunday', index: 7}
 ```
 
-
 ### Extending
 
 When creating an Enum extending from other, the parent Enum have priority on indices and values.
@@ -240,28 +234,9 @@ use `@method static static name()` syntax instead to help analysis tools.
 See examples at `tests/Fixtures/ColorsBasic.php`, `tests/Fixtures/ColorsExtended.php`
 and `tests/Fixtures/ColorsExtendedWithBlackAndWhite.php`.
 
-
 ### Exceptions
 
 Exceptions thrown from this package implements the empty interface `Eclipxe\Enum\Exceptions\EnumExceptionInterface`.
-
-
-### Differences from spatie/enum
-
-Well, both are based on the same idea, but they are different.
-
-Differences         | spatie/enum                       | eclipxe/enum
----                 | ---                               | ---
-Creational pattern  | construct by index, value or name | construct from index or value 
-*isX* Comparisons   | allow instanced and static calls  | allow only instanced calls
-Exposed information | many                              | only value/index
-Declarations        | declare in docblock and methods   | only docblock allowed
-JsonSerializable    | implemented                       | serialize/unserialize is up to you 
-Internals           | lot of static methods             | extracted logic to a different class
-Overloading         | as in java style                  | overriding methods for values and indices
-
-... and many others.
-
 
 ## PHP Support
 
@@ -287,22 +262,22 @@ The `eclipxe/enum` library is copyright © [Carlos C Soto](https://eclipxe.com.m
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 
-[contributing]: https://github.com/eclipxe13/enum/blob/master/CONTRIBUTING.md
-[changelog]: https://github.com/eclipxe13/enum/blob/master/docs/CHANGELOG.md
-[todo]: https://github.com/eclipxe13/enum/blob/master/docs/TODO.md
+[contributing]: https://github.com/eclipxe13/enum/blob/main/CONTRIBUTING.md
+[changelog]: https://github.com/eclipxe13/enum/blob/main/docs/CHANGELOG.md
+[todo]: https://github.com/eclipxe13/enum/blob/main/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/enum
 [release]: https://github.com/eclipxe13/enum/releases
-[license]: https://github.com/eclipxe13/enum/blob/master/LICENSE
-[build]: https://travis-ci.com/eclipxe13/enum?branch=master
+[license]: https://github.com/eclipxe13/enum/blob/main/LICENSE
+[build]: https://github.com/eclipxe13/enum/actions/workflows/build.yml?query=branch:main
 [quality]: https://scrutinizer-ci.com/g/eclipxe13/enum/
-[coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/master/code-coverage
+[coverage]: https://scrutinizer-ci.com/g/eclipxe13/enum/code-structure/main/code-coverage
 [downloads]: https://packagist.org/packages/eclipxe/enum
 
 [badge-source]: https://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/enum?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/enum?style=flat-square
-[badge-build]: https://img.shields.io/travis/com/eclipxe13/enum/master?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/master?style=flat-square
-[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/master?style=flat-square
+[badge-build]: https://img.shields.io/github/workflow/status/eclipxe13/enum/build/main?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/eclipxe13/enum/main?style=flat-square
+[badge-coverage]: https://img.shields.io/scrutinizer/coverage/g/eclipxe13/enum/main?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/eclipxe/enum?style=flat-square
