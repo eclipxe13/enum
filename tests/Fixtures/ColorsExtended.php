@@ -7,6 +7,8 @@ namespace Eclipxe\Enum\Tests\Fixtures;
 /**
  * This is a use case that extends from ColorsBasic and will be extended
  *
+ * @method static static green() this one must be ignored as it already exists on base class
+ *
  * @method static static yellow()
  * @method static static magenta()
  * @method static static cyan()
