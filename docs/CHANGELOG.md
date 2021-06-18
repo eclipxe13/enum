@@ -10,7 +10,17 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
-## Version 0.2.5 2020-06-08
+## Version 0.2.6 2020-06-17
+
+There are no significant code changes, only some refactoring to improve testing and type understanding.
+
+Integrate `psalm` and `infection` to build pipeline.
+
+Change default branch from `master` to `main`
+
+Move continuous integration to GitHub Actions. Thanks Travis-CI!
+
+## Version 0.2.5 2021-06-08
 
 Code changes:
 
