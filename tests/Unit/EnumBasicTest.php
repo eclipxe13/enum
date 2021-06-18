@@ -9,6 +9,7 @@ use Eclipxe\Enum\Exceptions\EnumConstructTypeError;
 use Eclipxe\Enum\Exceptions\IndexNotFoundException;
 use Eclipxe\Enum\Exceptions\ValueNotFoundException;
 use Eclipxe\Enum\Tests\Fixtures\Stages;
+use Error;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -125,10 +126,15 @@ class EnumBasicTest extends TestCase
         Stages::{$notDeclaredName}();
     }
 
-    public function testThrowsInvalidMethodCallOnInstantiated(): void
+    /**
+     * @param string $notDeclaredName
+     * @testWith ["notDeclaredName"]
+     *           ["is"]
+     *           ["Purged"]
+     */
+    public function testThrowsInvalidMethodCallOnInstantiated(string $notDeclaredName): void
     {
         $stage = Stages::purged();
-        $notDeclaredName = 'notDeclaredName';
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(sprintf('Call to undefined method %s::%s', Stages::class, $notDeclaredName));
         $stage->{$notDeclaredName}();
@@ -136,7 +142,12 @@ class EnumBasicTest extends TestCase
 
     public function testThrowTypeErrorWhenConstructCannotConvertObjectsToString(): void
     {
-        $this->expectException(EnumConstructTypeError::class);
-        new Stages(new \stdClass());
+        try {
+            new Stages(new \stdClass());
+        } catch (EnumConstructTypeError $exception) {
+            $this->assertInstanceOf(Error::class, $exception->getPrevious());
+            return;
+        }
+        $this->fail('Unable to catch EnumConstructTypeError');
     }
 }

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @noinspection PhpRedundantVariableDocTypeInspection
+ */
+
 declare(strict_types=1);
 
 namespace Eclipxe\Enum\Tests\Unit\Internal;
@@ -51,7 +55,9 @@ class EntriesPopulatorTest extends TestCase
      */
     public function testResolveNamesFromDocCommentSelf(string $specimen, array $expected): void
     {
-        $helper = new EntriesPopulator('foo', [], [], new Entries());
+        /** @var class-string $className */
+        $className = 'foo';
+        $helper = new EntriesPopulator($className, [], [], new Entries());
         $resolved = $helper->resolveNamesFromDocComment($specimen);
         $this->assertSame($expected, $resolved);
     }
@@ -63,8 +69,10 @@ class EntriesPopulatorTest extends TestCase
      */
     public function testResolveNamesFromDocCommentStatic(string $specimen, array $expected): void
     {
+        /** @var class-string $className */
+        $className = 'foo';
         $specimen = str_replace('self', 'static', $specimen);
-        $helper = new EntriesPopulator('foo', [], [], new Entries());
+        $helper = new EntriesPopulator($className, [], [], new Entries());
         $resolved = $helper->resolveNamesFromDocComment($specimen);
         $this->assertSame($expected, $resolved);
     }

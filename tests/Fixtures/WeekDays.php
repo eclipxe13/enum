@@ -17,7 +17,6 @@ use Eclipxe\Enum\Enum;
  * @method static self saturday()
  * @method static self sunday()
  *
- * @method bool isUni()
  * @method bool isMonday()
  * @method bool isTuesday()
  * @method bool isWednesday()

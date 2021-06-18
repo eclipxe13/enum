@@ -16,7 +16,7 @@ use ReflectionClass;
  */
 class EntriesPopulator
 {
-    /** @var string */
+    /** @var class-string */
     private $className;
 
     /** @var array<string, mixed> */
@@ -31,7 +31,7 @@ class EntriesPopulator
     /**
      * EntriesPopulator constructor.
      *
-     * @param string $className
+     * @param class-string $className
      * @param array<string, mixed> $overrideValues
      * @param array<string, mixed> $overrideIndices
      * @param Entries $parentEntries
@@ -48,6 +48,7 @@ class EntriesPopulator
         $this->parentEntries = $parentEntries;
     }
 
+    /** @return class-string */
     public function getClassName(): string
     {
         return $this->className;
@@ -61,7 +62,7 @@ class EntriesPopulator
         // populate with discovered
         $names = array_filter(
             $this->resolveNamesFromDocBlocks(),
-            function (string $name) use ($entries) {
+            function (string $name) use ($entries): bool {
                 return ! $entries->hasName($name);
             }
         );
@@ -83,7 +84,7 @@ class EntriesPopulator
     public function overrideValue(string $name): ?string
     {
         $value = $this->overrideValues[$name] ?? null;
-        if (null === $value || ! is_string($value)) {
+        if (! is_string($value)) {
             return null;
         }
         return $value;
@@ -92,7 +93,7 @@ class EntriesPopulator
     public function overrideIndex(string $name): ?int
     {
         $index = $this->overrideIndices[$name] ?? null;
-        if (null === $index || ! is_int($index)) {
+        if (! is_int($index)) {
             return null;
         }
         return $index;
@@ -105,7 +106,6 @@ class EntriesPopulator
     public function resolveNamesFromDocBlocks(): array
     {
         // get comments
-        /** @var class-string $className */
         $className = $this->getClassName();
         $reflectionClass = new ReflectionClass($className);
         $docComment = strval($reflectionClass->getDocComment());
