@@ -11,6 +11,7 @@ use Eclipxe\Enum\Exceptions\ValueNotFoundException;
 use Eclipxe\Enum\Tests\Fixtures\Stages;
 use Error;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * This tests are based on Eclipxe\Enum\Tests\Enums\Stages
@@ -140,10 +141,18 @@ class EnumBasicTest extends TestCase
         $stage->{$notDeclaredName}();
     }
 
+    /** @requires PHP < 7.4 */
+    public function testThrowTypeErrorWhenConstructCannotConvertObjectsToStringPhp72(): void
+    {
+        $this->expectException(EnumConstructTypeError::class);
+        new Stages(new stdClass());
+    }
+
+    /** @requires PHP >= 7.4 */
     public function testThrowTypeErrorWhenConstructCannotConvertObjectsToString(): void
     {
         try {
-            new Stages(new \stdClass());
+            new Stages(new stdClass());
         } catch (EnumConstructTypeError $exception) {
             $this->assertInstanceOf(Error::class, $exception->getPrevious());
             return;
