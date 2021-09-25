@@ -32,12 +32,6 @@ jobs:
         env:
           fail-fast: true
 
-      - name: TEST Mutation testing (infection)
-        # run this way because infection phar is not working on php 7.4
-        run: |
-          composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
-          vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
-
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -66,6 +60,12 @@ jobs:
 
       - name: Code analysis (psalm)
         run: psalm --no-progress
+
+      - name: TEST Mutation testing (infection)
+        # run this way because infection phar is not working on php 7.4
+        run: |
+          composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
+          vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
 
       # see https://github.com/marketplace/actions/action-scrutinizer
       - name: Upload code coverage to scrutinizer
