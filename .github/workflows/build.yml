@@ -61,7 +61,7 @@ jobs:
       - name: Code analysis (psalm)
         run: psalm --no-progress
 
-      - name: TEST Mutation testing (infection)
+      - name: Mutation testing (infection)
         # run this way because infection phar is not working on php 7.4
         run: |
           composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
