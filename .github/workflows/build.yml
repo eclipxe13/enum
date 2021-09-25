@@ -25,12 +25,18 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
+          php-version: '7.4' # cannot use php 8.0 because phpunit dependency
           extensions: filter, fileinfo, dom
           coverage: xdebug
-          tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm, infection
+          tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm
         env:
           fail-fast: true
+
+      - name: TEST Mutation testing (infection)
+        # run this way because infection phar is not working on php 7.4
+        run: |
+          composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
+          vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
 
       - name: Get composer cache directory
         id: composer-cache
@@ -60,9 +66,6 @@ jobs:
 
       - name: Code analysis (psalm)
         run: psalm --no-progress
-
-      - name: Mutation testing (infection)
-        run: infection --no-progress --no-interaction --show-mutations --logger-github
 
       # see https://github.com/marketplace/actions/action-scrutinizer
       - name: Upload code coverage to scrutinizer
