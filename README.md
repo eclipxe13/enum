@@ -14,7 +14,7 @@ After reading the article [PHP Enums from Brent Roose](https://stitcher.io/blog/
 the implementation made on [spatie/enum](https://github.com/spatie/enum) I think that it overloaded
 my expectations. Maybe spatie/enum version 1.0 was more close to what I needed.
 
-So, I created this framework agnostic implementation library about the same concept.
+So, I created this framework-agnostic implementation library about the same concept.
 
 As of PHP 8.1 enums will be part of the language, it means that this library will not be required anymore. 
 Check the RFC <https://wiki.php.net/rfc/enumerations> and adapt your code to use PHP Enums.
@@ -84,7 +84,7 @@ $other = new Stages($purged);
 // create from static method
 $purged = Stages::purged();
 
-// create from static method is not case sensitive as methods are not
+// create from static method is not case-sensitive as methods are not
 $purged = Stages::{'PURGED'}();
 
 // throws a BadMethodCallException because foobar is not part of the enum
@@ -217,7 +217,7 @@ use Eclipxe\Enum\Tests\Fixtures\WeekDays;
 new WeekDays(0); // throws IndexNotFoundException
 new WeekDays(1); // WeekDays {value: 'Monday', index: 1}
 
-new WeekDays('sunday'); // throws ValueNotFoundException (it is case sensitive)
+new WeekDays('sunday'); // throws ValueNotFoundException (it is case-sensitive)
 new WeekDays('Sunday'); // WeekDays {value: 'Sunday', index: 7}
 ```
 
