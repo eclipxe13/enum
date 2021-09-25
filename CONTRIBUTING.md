@@ -19,7 +19,7 @@ You can find help and discussion in the following places:
 
 ## Reporting Bugs
 
-Bugs are tracked in our project's [issue tracker](https://github.com/eclipxe13/enum/issues).
+We track our bugs in our project's [issue tracker](https://github.com/eclipxe13/enum/issues).
 
 When submitting a bug report, please include enough information for us to reproduce the bug.
 A good bug report includes the following sections:
@@ -65,13 +65,13 @@ When you do begin working on your feature, here are some guidelines to consider:
 This project uses different development tools to ensure code style, test and quality (using code analyzers).
 
 ```shell
-# install project direct dependences
+# install project direct dependencies
 composer install
 
-# install development tools dependences (using composer script)
+# install development tools dependencies (using composer script)
 composer dev:install
 
-# install development tools dependences (using installer script)
+# install development tools dependencies (using installer script)
 bash develop/install-development-tools
 ```
 
@@ -104,7 +104,7 @@ tools/php-cs-fixer fix -v --dry-run
 vendor/bin/phpunit --testdox
 tools/phpstan analyze
 tools/psalm
-phpdbg -qrr tools/infection --show-mutations
+tools/infection --show-mutations
 ```
 
 ## Running GitHub Actions locally

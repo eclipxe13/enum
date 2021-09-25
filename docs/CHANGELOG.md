@@ -10,6 +10,14 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2021-09-25
+
+Fixed CI. Infection fails because it is not working on PHP 7.4.
+PHPUnit cannot create code coverage for infection on PHP 8.0; so, upgrade to PHP 8.0 is not a solution.
+Install and run Infection throught Composer is the right workaround.
+
+Improve wording and typos on `README` and `CONTRIBUTING`.
+
 ## Version 0.2.6 2020-06-17
 
 There are no significant code changes, only some refactoring to improve testing and type understanding.
