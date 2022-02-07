@@ -26,7 +26,6 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4' # cannot use php 8.0 because phpunit dependency to create code coverage
-          extensions: filter, fileinfo, dom
           coverage: xdebug
           tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm
         env:
@@ -64,9 +63,9 @@ jobs:
           composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
           vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
 
-  build:
+  test:
 
-    name: PHP ${{ matrix.php-versions }}
+    name: Test on PHP ${{ matrix.php-versions }}
     runs-on: "ubuntu-latest"
 
     strategy:
@@ -83,9 +82,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: filter, fileinfo, dom
           coverage: none
-          tools: composer:v2, cs2pr
+          tools: composer:v2
         env:
           fail-fast: true
 
