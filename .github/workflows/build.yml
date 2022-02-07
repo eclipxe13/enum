@@ -25,7 +25,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4' # cannot use php 8.0 because phpunit dependency
+          php-version: '7.4' # cannot use php 8.0 because phpunit dependency to create code coverage
           extensions: filter, fileinfo, dom
           coverage: xdebug
           tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm
