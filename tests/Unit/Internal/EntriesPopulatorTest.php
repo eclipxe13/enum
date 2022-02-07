@@ -48,7 +48,11 @@ class EntriesPopulatorTest extends TestCase
         ];
     }
 
-    /** @dataProvider providerResolveNamesFromDocComment */
+    /**
+     * @param string $specimen
+     * @param string[] $expected
+     * @dataProvider providerResolveNamesFromDocComment
+     */
     public function testResolveNamesFromDocCommentSelf(string $specimen, array $expected): void
     {
         /** @var class-string $className */
@@ -58,7 +62,11 @@ class EntriesPopulatorTest extends TestCase
         $this->assertSame($expected, $resolved);
     }
 
-    /** @dataProvider providerResolveNamesFromDocComment */
+    /**
+     * @param string $specimen
+     * @param string[] $expected
+     * @dataProvider providerResolveNamesFromDocComment
+     */
     public function testResolveNamesFromDocCommentStatic(string $specimen, array $expected): void
     {
         /** @var class-string $className */
