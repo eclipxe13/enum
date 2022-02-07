@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-  ci: # this job runs all the development tools and upload code coverage to scrutinizer
+  ci: # this job runs all the development tools
 
     name: Continuous Integration
     runs-on: "ubuntu-latest"
@@ -25,8 +25,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4' # cannot use php 8.0 because phpunit dependency
-          extensions: filter, fileinfo, dom
+          php-version: '7.4' # cannot use php 8.0 because phpunit dependency to create code coverage
           coverage: xdebug
           tools: composer:v2, cs2pr, phpcs, php-cs-fixer, phpstan, psalm
         env:
@@ -52,9 +51,6 @@ jobs:
       - name: Code style (php-cs-fixer)
         run: php-cs-fixer fix --dry-run --format=checkstyle | cs2pr
 
-      - name: Tests (phpunit with code coverage)
-        run: vendor/bin/phpunit --testdox --verbose --coverage-clover=build/coverage-clover.xml
-
       - name: Code analysis (phpstan)
         run: phpstan analyse --no-progress --verbose
 
@@ -67,21 +63,14 @@ jobs:
           composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
           vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
 
-      # see https://github.com/marketplace/actions/action-scrutinizer
-      - name: Upload code coverage to scrutinizer
-        uses: sudo-bot/action-scrutinizer@latest
-        with:
-          cli-args: "--format=php-clover build/coverage-clover.xml"
-        continue-on-error: true
+  test:
 
-  build:
-
-    name: PHP ${{ matrix.php-versions }}
+    name: Test on PHP ${{ matrix.php-versions }}
     runs-on: "ubuntu-latest"
 
     strategy:
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0']
+        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1']
 
     steps:
 
@@ -93,9 +82,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: filter, fileinfo, dom
           coverage: none
-          tools: composer:v2, cs2pr
+          tools: composer:v2
         env:
           fail-fast: true
 

@@ -10,6 +10,18 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2022-02-06
+
+Update license year. Happy 2022!
+
+Fixed CI. PHPStan was failing because missing types declaration on `EntriesPopulatorTest`.
+
+Add PHP 8.1 to test matrix on build.
+
+Migrate from `develop/install-development-tools` to `phive`.
+
+Run test coverage on Scrutinizer CI.
+
 ## UNRELEASED 2021-09-25
 
 Fixed CI. Infection fails because it is not working on PHP 7.4.

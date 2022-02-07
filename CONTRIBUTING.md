@@ -66,13 +66,10 @@ This project uses different development tools to ensure code style, test and qua
 
 ```shell
 # install project direct dependencies
-composer install
+composer update
 
-# install development tools dependencies (using composer script)
-composer dev:install
-
-# install development tools dependencies (using installer script)
-bash develop/install-development-tools
+# install development tools dependencies (using phive)
+phive update
 ```
 
 ## Check the code style
