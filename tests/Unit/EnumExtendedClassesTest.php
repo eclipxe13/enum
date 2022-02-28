@@ -66,7 +66,7 @@ class EnumExtendedClassesTest extends TestCase
 
     public function testTypeHierarchy(): void
     {
-        $consumer = new class() {
+        $consumer = new class () {
             public function sample(ColorsBasic $color): bool
             {
                 return $color->isRed();
@@ -91,7 +91,7 @@ class EnumExtendedClassesTest extends TestCase
             sprintf('sample(ColorsBasic) must receive %s (extended)', get_class($extCyan))
         );
 
-        $inline = new class('red') extends ColorsExtended {
+        $inline = new class ('red') extends ColorsExtended {
         };
         $this->assertTrue(
             $consumer->sample($inline),

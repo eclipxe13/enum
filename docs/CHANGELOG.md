@@ -10,6 +10,15 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2022-02-28
+
+This is a maintenance update:
+
+- Fixed CI. Remove Psalm deprecated attribute `totallyTyped`.
+- On GitHub workflow for CI, split steps into jobs.
+- Update code style rules.
+- Add PHP Version badge on README.
+
 ## UNRELEASED 2022-02-06
 
 Update license year. Happy 2022!

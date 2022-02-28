@@ -1,6 +1,7 @@
 # `eclipxe/enum`
 
 [![Source Code][badge-source]][source]
+[![Packagist PHP Version Support][badge-php-version]][php-version]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
@@ -267,6 +268,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [todo]: https://github.com/eclipxe13/enum/blob/main/docs/TODO.md
 
 [source]: https://github.com/eclipxe13/enum
+[php-version]: https://packagist.org/packages/eclipxe/enum
 [release]: https://github.com/eclipxe13/enum/releases
 [license]: https://github.com/eclipxe13/enum/blob/main/LICENSE
 [build]: https://github.com/eclipxe13/enum/actions/workflows/build.yml?query=branch:main
@@ -275,6 +277,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [downloads]: https://packagist.org/packages/eclipxe/enum
 
 [badge-source]: https://img.shields.io/badge/source-eclipxe13/enum-blue?style=flat-square
+[badge-php-version]: https://img.shields.io/packagist/php-v/eclipxe/enum?style=flat-square
 [badge-release]: https://img.shields.io/github/release/eclipxe13/enum?style=flat-square
 [badge-license]: https://img.shields.io/github/license/eclipxe13/enum?style=flat-square
 [badge-build]: https://img.shields.io/github/workflow/status/eclipxe13/enum/build/main?style=flat-square
