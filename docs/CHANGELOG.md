@@ -17,6 +17,7 @@ This is a maintenance update:
 - Fixed CI. Add configuration for `infection/extension-installer` (deny).
 - Add ordered imports to `php-cs-fixer` connfiguration.
 - Update development tools.
+- Fix Scrutinizer CI to run on PHP 7.4.
 
 ## UNRELEASED 2022-02-28
 
