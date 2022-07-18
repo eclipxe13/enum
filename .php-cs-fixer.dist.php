@@ -18,6 +18,7 @@ return (new PhpCsFixer\Config())
         '@PHP71Migration:risky' => true,
         '@PHP73Migration' => true,
         // symfony
+        'ordered_imports' => ['imports_order' => ['class', 'function', 'const']], // @PSR12 sort_algorithm: none
         'class_attributes_separation' => true,
         'whitespace_after_comma_in_array' => true,
         'no_empty_statement' => true,
