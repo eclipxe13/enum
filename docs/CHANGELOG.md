@@ -10,6 +10,15 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2022-07-18
+
+This is a maintenance update:
+
+- Fixed CI. Add configuration for `infection/extension-installer` (deny).
+- Add ordered imports to `php-cs-fixer` connfiguration.
+- Update development tools.
+- Fix Scrutinizer CI to run on PHP 7.4.
+
 ## UNRELEASED 2022-02-28
 
 This is a maintenance update:
