@@ -31,6 +31,11 @@
             "Eclipxe\\Enum\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": false
+        }
+    },
     "scripts": {
         "dev:build": ["@dev:fix-style", "@dev:test"],
         "dev:check-style": [
