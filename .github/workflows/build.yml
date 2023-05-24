@@ -21,7 +21,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, cs2pr, phpcs
         env:
@@ -38,7 +38,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, cs2pr, php-cs-fixer
         env:
@@ -55,7 +55,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, phpstan
         env:
@@ -83,7 +83,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, psalm
         env:
@@ -107,7 +107,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
