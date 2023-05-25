@@ -47,7 +47,7 @@ abstract class Enum
         // convert to string if object
         if (is_object($valueOrIndex)) {
             try {
-                $valueOrIndex = strval($valueOrIndex);
+                $valueOrIndex = strval($valueOrIndex); // @phpstan-ignore-line
             } catch (Throwable $exception) {
                 throw EnumConstructTypeError::create(static::class, $exception);
             }
