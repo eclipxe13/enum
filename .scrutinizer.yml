@@ -6,12 +6,16 @@ filter:
 build:
   dependencies:
     override:
+      - composer require 'php:>=8.2' --no-install
+      - composer require phpunit/phpunit:^9 --dev --update-with-all-dependencies --no-install
       - composer upgrade --no-interaction --prefer-dist
+      - vendor/bin/phpunit --migrate-configuration
+      - sed -i -E 's/executionOrder=".*?"/executionOrder="default"/' phpunit.xml.dist
   nodes:
     analysis: # see https://scrutinizer-ci.com/docs/tools/php/php-scrutinizer/
       environment:
         php:
-          version: 7.4
+          version: 8.2
       project_setup: { override: true }
       tests:
         override:

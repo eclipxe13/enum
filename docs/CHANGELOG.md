@@ -10,12 +10,31 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2023-05-24
+
+This is a maintenance update:
+
+- Fix false positive PHPStan issue.
+- Update license year.
+- Fix badge build on `README.md`.
+- Fix GitHub workflow:
+  - Run tools on PHP 8.2.
+  - Refactor infection job to run on PHP 8.2.
+  - Replace `::set-output` with `$GITHUB_OUTPUT`.
+  - Remove composer tool when is not required.
+- Fix Scrutinizer CI to run on PHP 8.2.
+- Update `php-cs-fixer` configuration:
+  - Fix `no_trailing_comma_in_singleline`.
+  - Add `fully_qualified_strict_types`.
+  - Add `trailing_comma_in_multiline`. 
+- Update development tools.
+
 ## UNRELEASED 2022-07-18
 
 This is a maintenance update:
 
 - Fixed CI. Add configuration for `infection/extension-installer` (deny).
-- Add ordered imports to `php-cs-fixer` connfiguration.
+- Add ordered imports to `php-cs-fixer` configuration.
 - Update development tools.
 - Fix Scrutinizer CI to run on PHP 7.4.
 

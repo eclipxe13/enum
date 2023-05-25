@@ -21,9 +21,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
-          tools: composer:v2, cs2pr, phpcs
+          tools: cs2pr, phpcs
         env:
           fail-fast: true
       - name: Code style (phpcs)
@@ -38,9 +38,9 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
-          tools: composer:v2, cs2pr, php-cs-fixer
+          tools: cs2pr, php-cs-fixer
         env:
           fail-fast: true
       - name: Code style (php-cs-fixer)
@@ -55,14 +55,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, phpstan
         env:
           fail-fast: true
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -83,14 +83,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.0'
+          php-version: '8.2'
           coverage: none
           tools: composer:v2, psalm
         env:
           fail-fast: true
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -107,7 +107,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1']
+        php-versions: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -121,7 +121,7 @@ jobs:
           fail-fast: true
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -142,14 +142,14 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4' # code coverage cannot be made with phpunit 8 and php >= 8.0
+          php-version: '8.2'
           coverage: xdebug
-          tools: composer:v2
+          tools: composer:v2, infection
         env:
           fail-fast: true
       - name: Get composer cache directory
         id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
@@ -157,9 +157,13 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           restore-keys: ${{ runner.os }}-composer-
       - name: Install project dependencies
-        run: composer upgrade --no-interaction --no-progress --prefer-dist
-      - name: Mutation testing
-        # run this way because infection phar is not working on php 7.4
         run: |
-          composer require --dev infection/infection --no-interaction --no-progress --prefer-dist
-          vendor/bin/infection --no-progress --no-interaction --show-mutations --logger-github
+          composer require 'php:>=8.2' --no-install
+          composer require phpunit/phpunit:^9 --dev --update-with-all-dependencies --no-install
+          composer upgrade --no-interaction --no-progress --prefer-dist
+      - name: Upgrade PHPUnit configuration file
+        run: |
+          vendor/bin/phpunit --migrate-configuration
+          sed -i -E 's/executionOrder=".*?"/executionOrder="default"/' phpunit.xml.dist
+      - name: Mutation testing
+        run: infection --no-progress --no-interaction --show-mutations --logger-github
