@@ -17,8 +17,10 @@ my expectations. Maybe spatie/enum version 1.0 was more close to what I needed.
 
 So, I created this framework-agnostic implementation library about the same concept.
 
-As of PHP 8.1 enums will be part of the language, it means that this library will not be required anymore. 
-Check the RFC <https://wiki.php.net/rfc/enumerations> and adapt your code to use PHP Enums.
+As of PHP 8.1 enums are part of the language, it means that this library will not be required anymore. 
+Read the PHP documentation <https://www.php.net/manual/en/language.enumerations.php> and adapt your code.
+One big difference between PHP enums and the objects on this library is that native PHP enums cannot
+use the magic method `__toString` (they are not *`Stringable`*), and the enums on this library are.
 
 ## Installation
 
