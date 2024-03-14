@@ -21,7 +21,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: none
           tools: cs2pr, phpcs
         env:
@@ -38,7 +38,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: none
           tools: cs2pr, php-cs-fixer
         env:
@@ -55,7 +55,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: none
           tools: composer:v2, phpstan
         env:
@@ -83,7 +83,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: none
           tools: composer:v2, psalm
         env:
@@ -144,7 +144,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
+          php-version: '8.3'
           coverage: xdebug
           tools: composer:v2, infection
         env:
@@ -160,7 +160,7 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install project dependencies
         run: |
-          composer require 'php:>=8.2' --no-install
+          composer require 'php:>=8.3' --no-install
           composer require phpunit/phpunit:^9 --dev --update-with-all-dependencies --no-install
           composer upgrade --no-interaction --no-progress --prefer-dist
       - name: Upgrade PHPUnit configuration file
