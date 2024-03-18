@@ -10,6 +10,21 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2024-03-18
+
+This is a maintenance update:
+
+- Update documentation about PHP Native enums.
+- Update license year.
+- Update coding standards.
+- Fix GitHub workflow:
+  - Add PHP 8.3 to test matrix.
+  - Run jobs using PHP 8.3.
+  - Use GitHub actions version 4.
+  - Show PSalm version before run.
+  - Allow dispatch workflows manually.
+- Update development tools.
+
 ## UNRELEASED 2023-05-24
 
 This is a maintenance update:
