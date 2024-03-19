@@ -137,41 +137,6 @@ jobs:
       - name: Tests (phpunit)
         run: vendor/bin/phpunit --testdox --verbose
 
-  infection:
-    name: Mutation testing (infection)
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          coverage: xdebug
-          tools: composer:v2, infection
-        env:
-          fail-fast: true
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
-          restore-keys: ${{ runner.os }}-composer-
-      - name: Install project dependencies
-        run: |
-          composer require 'php:>=8.3' --no-install
-          composer require phpunit/phpunit:^9 --dev --update-with-all-dependencies --no-install
-          composer upgrade --no-interaction --no-progress --prefer-dist
-      - name: Upgrade PHPUnit configuration file
-        run: |
-          vendor/bin/phpunit --migrate-configuration
-          sed -i -E 's/executionOrder=".*?"/executionOrder="default"/' phpunit.xml.dist
-      - name: Mutation testing
-        run: infection --no-progress --no-interaction --show-mutations --logger-github
-
   code-coverage:
     name: Create code coverage
     runs-on: "ubuntu-latest"
@@ -231,3 +196,40 @@ jobs:
         uses: sudo-bot/action-scrutinizer@latest
         with:
           cli-args: "--format=php-clover build/coverage/clover.xml"
+
+  infection:
+    name: Mutation testing (infection)
+    needs: code-coverage
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2, infection
+        env:
+          fail-fast: true
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+      - name: Install project dependencies
+        run: |
+          composer require 'php:>=8.3' --no-install
+          composer require phpunit/phpunit:^9 --dev --update-with-all-dependencies --no-install
+          composer upgrade --no-interaction --no-progress --prefer-dist
+      - name: Obtain code coverage
+        uses: actions/download-artifact@v4
+        with:
+          name: code-coverage
+          path: build/coverage
+      - name: Mutation testing
+        run: infection --skip-initial-tests --coverage=build/coverage --no-progress --no-interaction --logger-github
