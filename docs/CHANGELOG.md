@@ -10,6 +10,13 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## UNRELEASED 2024-09-03
+
+This is a maintenance update:
+
+- Change `preg_match_all` validation at `EntriesPopulator::resolveNamesFromDocComment()` to satisfy code analysis.
+- Update development tools.
+
 ## UNRELEASED 2024-03-18
 
 This is a maintenance update:

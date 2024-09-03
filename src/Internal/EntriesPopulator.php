@@ -123,6 +123,6 @@ class EntriesPopulator
         //  [\w]+: any word letters, numbers and underscore
         //  /m: ^ match beginning of the line
         preg_match_all('/^[*\t ]*@method static (self|static) ([\w]+)\(\)/m', $docComment, $matches);
-        return $matches[2] ?? [];
+        return $matches[2];
     }
 }
