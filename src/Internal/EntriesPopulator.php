@@ -122,9 +122,7 @@ class EntriesPopulator
         //  [*\t ]*: any asterisk, space or tab
         //  [\w]+: any word letters, numbers and underscore
         //  /m: ^ match beginning of the line
-        if (false === preg_match_all('/^[*\t ]*@method static (self|static) ([\w]+)\(\)/m', $docComment, $matches)) {
-            return [];
-        }
+        preg_match_all('/^[*\t ]*@method static (self|static) ([\w]+)\(\)/m', $docComment, $matches);
         return $matches[2];
     }
 }
