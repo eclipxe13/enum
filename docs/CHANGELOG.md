@@ -10,6 +10,20 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.7 2025-03-29
+
+This is a compatibility release with PHP 8.4.
+Added nullable type indicator `?` when default parameter value is `null`.
+
+The license year has been updated.
+
+Maintenance changes:
+
+- On GitHub workflow, add PHP 8.4 to test matrix.
+- Update PSalm configuration to ignore false positives.
+
+This release include all previous unreleased entries.
+
 ## UNRELEASED 2024-09-03
 
 This is a maintenance update:

@@ -44,7 +44,7 @@ class EnumBasicTest extends TestCase
     public function testCreateEnumCallingStaticMethodWithDifferentCase(): void
     {
         /** @var Stages $stage */
-        $stage = Stages::{'PUBLISHED'}();
+        $stage = Stages::{'PUBLISHED'}(); /** @phpstan-ignore staticMethod.notFound */
         $this->assertSame('published', $stage->value());
         $this->assertSame(1, $stage->index());
     }
@@ -74,7 +74,7 @@ class EnumBasicTest extends TestCase
     public function testMagicMethodIsWithNonDeclaredName(): void
     {
         $stage = Stages::published();
-        $this->assertFalse($stage->{'isNotDeclaredName'}());
+        $this->assertFalse($stage->{'isNotDeclaredName'}()); /** @phpstan-ignore method.notFound */
     }
 
     public function testMagicMethodToString(): void
@@ -124,7 +124,7 @@ class EnumBasicTest extends TestCase
         $notDeclaredName = 'notDeclaredName';
         $this->expectException(BadMethodCallException::class);
         $this->expectExceptionMessage(sprintf('Call to undefined method %s::%s', Stages::class, $notDeclaredName));
-        Stages::{$notDeclaredName}();
+        Stages::{$notDeclaredName}(); /** @phpstan-ignore staticMethod.notFound */
     }
 
     /**
