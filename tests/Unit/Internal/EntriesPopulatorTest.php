@@ -55,9 +55,8 @@ class EntriesPopulatorTest extends TestCase
      */
     public function testResolveNamesFromDocCommentSelf(string $specimen, array $expected): void
     {
-        /** @var class-string $className */
         $className = 'foo';
-        $helper = new EntriesPopulator($className, [], [], new Entries());
+        $helper = new EntriesPopulator($className, [], [], new Entries()); /** @phpstan-ignore argument.type */
         $resolved = $helper->resolveNamesFromDocComment($specimen);
         $this->assertSame($expected, $resolved);
     }
@@ -69,10 +68,9 @@ class EntriesPopulatorTest extends TestCase
      */
     public function testResolveNamesFromDocCommentStatic(string $specimen, array $expected): void
     {
-        /** @var class-string $className */
         $className = 'foo';
         $specimen = str_replace('self', 'static', $specimen);
-        $helper = new EntriesPopulator($className, [], [], new Entries());
+        $helper = new EntriesPopulator($className, [], [], new Entries());  /** @phpstan-ignore argument.type */
         $resolved = $helper->resolveNamesFromDocComment($specimen);
         $this->assertSame($expected, $resolved);
     }

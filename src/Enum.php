@@ -178,7 +178,7 @@ abstract class Enum
         if ('' === $parentClass || self::class === $parentClass) {
             return new Entries();
         }
-        /** @var Enum $parentClass */
+        /** @var class-string<Enum> $parentClass */
         return $parentClass::currentEntries();
     }
 }
