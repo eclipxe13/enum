@@ -78,7 +78,7 @@ abstract class Enum
     public function __call(string $name, array $arguments)
     {
         if (strlen($name) > 2 && 'is' === substr($name, 0, 2)) {
-            $entry = static::currentEntries()->findEntryByName(substr($name, 2));
+            $entry = static::currentEntries()->findEntryByName((string) substr($name, 2));
             return (null !== $entry && $this->content->equals($entry));
         }
 
