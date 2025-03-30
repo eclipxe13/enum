@@ -38,8 +38,8 @@ abstract class Enum
      *
      * @param string|int|mixed $valueOrIndex
      *
-     * @throws IndexNotFoundException if received argument is an integer and it was not found in indices
-     * @throws ValueNotFoundException if received argument is a string and it was not found in values
+     * @throws IndexNotFoundException if received argument is an integer, and it was not found in indices
+     * @throws ValueNotFoundException if received argument is a string, and it was not found in values
      * @throws EnumConstructTypeError if received argument is not an integer, string, scalar or object
      */
     final public function __construct($valueOrIndex)
@@ -53,7 +53,7 @@ abstract class Enum
             }
         }
 
-        if (is_int($valueOrIndex)) { // is index
+        if (is_int($valueOrIndex)) { // is integer index
             $entry = static::currentEntries()->findEntryByIndex($valueOrIndex);
             if (null === $entry) {
                 throw IndexNotFoundException::create(static::class, strval($valueOrIndex));
@@ -174,7 +174,7 @@ abstract class Enum
     final protected static function parentEntries(): Entries
     {
         $parentClass = strval(get_parent_class(static::class));
-        // if does not have a parent class or is the base template (Enum class)
+        // if it does not have a parent class or is the base template (Enum class)
         if ('' === $parentClass || self::class === $parentClass) {
             return new Entries();
         }
