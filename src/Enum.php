@@ -79,7 +79,7 @@ abstract class Enum
     {
         if (strlen($name) > 2 && 'is' === substr($name, 0, 2)) {
             $entry = static::currentEntries()->findEntryByName((string) substr($name, 2));
-            return (null !== $entry && $this->content->equals($entry));
+            return null !== $entry && $this->content->equals($entry);
         }
 
         throw BadMethodCallException::create(static::class, $name);

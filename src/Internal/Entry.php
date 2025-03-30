@@ -36,16 +36,16 @@ class Entry
 
     public function equals(self $other): bool
     {
-        return ($this->equalValue($other->value()) && $this->equalIndex($other->index()));
+        return $this->equalValue($other->value()) && $this->equalIndex($other->index());
     }
 
     public function equalValue(string $value): bool
     {
-        return (0 === strcmp($this->value, $value));
+        return 0 === strcmp($this->value, $value);
     }
 
     public function equalIndex(int $index): bool
     {
-        return ($this->index === $index);
+        return $this->index === $index;
     }
 }
