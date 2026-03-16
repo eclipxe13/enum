@@ -10,6 +10,17 @@ In summary, [SemVer](https://semver.org/) can be viewed as `[ Breaking ].[ Featu
 
 **Version `0.x.x` doesn't have to apply any of the SemVer rules**
 
+## Version 0.2.8 2026-03-16
+
+The license year has been updated.
+
+Maintenance changes:
+
+- On GitHub workflow, add PHP 8.5 to test matrix.
+- Remove deprecated rule for `phpcs`. This change fixes build workflow.
+- Improve `.githubignore` by removing non existent directory.
+- Update development tools.
+
 ## Version 0.2.7 2025-03-29
 
 This is a compatibility release with PHP 8.4.
